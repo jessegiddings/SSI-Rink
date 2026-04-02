@@ -67,6 +67,7 @@ export function BookingForm({ session, sessionType }: BookingFormProps) {
         });
         if (res.ok) {
           const booking = await res.json();
+          sessionStorage.setItem(`booking_${booking.id}`, JSON.stringify(booking));
           window.location.href = `/booking/confirmation?id=${booking.id}`;
         }
       } catch {
@@ -76,7 +77,7 @@ export function BookingForm({ session, sessionType }: BookingFormProps) {
       return;
     }
 
-    // For paid sessions, redirect to Stripe
+    // For paid sessions, try Stripe checkout
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
@@ -92,8 +93,32 @@ export function BookingForm({ session, sessionType }: BookingFormProps) {
         }),
       });
       if (res.ok) {
-        const { url } = await res.json();
-        window.location.href = url;
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+          return;
+        }
+      }
+      // If Stripe isn't configured, create booking directly (demo mode)
+      const bookingRes = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: session.id,
+          guest_name: guestName,
+          guest_email: guestEmail,
+          num_adults: numAdults,
+          num_children: numChildren,
+          is_family: isFamily || isFamilyOnly,
+          total_price: totalPrice,
+        }),
+      });
+      if (bookingRes.ok) {
+        const booking = await bookingRes.json();
+        // Store booking data for confirmation page in demo mode
+        sessionStorage.setItem(`booking_${booking.id}`, JSON.stringify(booking));
+        window.location.href = `/booking/confirmation?id=${booking.id}`;
+        return;
       }
     } catch {
       // Handle error
