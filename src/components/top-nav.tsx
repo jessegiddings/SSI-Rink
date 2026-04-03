@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Calendar, Ticket, Lock, User, Snowflake } from 'lucide-react';
+import { Calendar, Ticket, Lock, User } from 'lucide-react';
 
 const navLinks = [
   { href: '/schedule', label: 'Schedule', icon: Calendar },
@@ -18,8 +19,8 @@ export function TopNav() {
     <header className="hidden md:block bg-navy text-white sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Snowflake className="w-6 h-6 text-ice-blue" />
-          <span>SSI Ice Rink</span>
+          <Image src="/logo.png" alt="SSI Arena" width={36} height={36} className="w-9 h-9" />
+          <span>SSI Arena</span>
         </Link>
         <nav className="flex items-center gap-1">
           {navLinks.map(({ href, label, icon: Icon }) => {

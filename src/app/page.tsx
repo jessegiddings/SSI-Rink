@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Calendar, Ticket, Lock, Snowflake, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { Calendar, Ticket, Lock, ArrowRight } from 'lucide-react';
 import { getUpcomingSessions, getSessionTypes } from '@/lib/data';
 import { SessionCard } from '@/components/schedule/session-card';
 
@@ -14,13 +15,26 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="bg-navy text-white">
         <div className="max-w-6xl mx-auto px-4 py-12 md:py-20">
-          <div className="flex items-center gap-3 mb-4">
-            <Snowflake className="w-10 h-10 text-ice-blue" />
-            <h1 className="text-3xl md:text-5xl font-bold">SSI Ice Rink</h1>
+          <div className="flex flex-col items-center md:flex-row md:items-center gap-6 mb-8">
+            <Image
+              src="/logo.png"
+              alt="Salt Spring Island Community Arena Association"
+              width={180}
+              height={180}
+              className="w-36 h-36 md:w-44 md:h-44"
+              priority
+            />
+            <div>
+              <h1 className="text-3xl md:text-5xl font-bold text-center md:text-left">
+                Salt Spring Island
+              </h1>
+              <p className="text-ice-blue text-lg md:text-2xl font-semibold text-center md:text-left mt-1">
+                Community Arena Association
+              </p>
+            </div>
           </div>
-          <p className="text-white/70 text-lg md:text-xl max-w-xl mb-8">
-            Salt Spring Island&apos;s community ice rink. Open skating, hockey,
-            private rentals, and birthday parties for all ages.
+          <p className="text-white/70 text-lg md:text-xl max-w-xl mb-8 text-center md:text-left">
+            Open skating, hockey, private rentals, and birthday parties for all ages.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
