@@ -19,7 +19,7 @@ export function TopNav() {
     <header className="hidden md:block bg-navy text-white sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Image src="/logo.png" alt="SSI Arena" width={36} height={36} className="w-9 h-9" />
+          <Image src="/IMG_4398.png" alt="SSI Arena" width={36} height={36} className="w-9 h-9" />
           <span>SSI Arena</span>
         </Link>
         <nav className="flex items-center gap-1">

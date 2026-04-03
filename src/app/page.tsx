@@ -17,7 +17,7 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col items-center md:flex-row md:items-center gap-6 mb-8">
             <Image
-              src="/logo.png"
+              src="/IMG_4398.png"
               alt="Salt Spring Island Community Arena Association"
               width={180}
               height={180}
